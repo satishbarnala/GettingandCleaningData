@@ -1,7 +1,6 @@
 ## STEP 0: load required packages 
-# load the reshape2 package (will be used in STEP 5) 
+# load the reshape2 package
 library(reshape2) 
- 
  
 ## STEP 1: Merges the training and the test sets to create one data set 
  
@@ -34,8 +33,7 @@ combined <- rbind(train, test)
 ## STEP 2: Extracts only the measurements on the mean and standard 
 ## deviation for each measurement. 
 # determine which columns contain "mean()" or "std()" 
-meanstdcols <- grepl("mean\\(\\)", names(combined)) | 
-grepl("std\\(\\)", names(combined)) 
+meanstdcols <- grepl("mean\\(\\)", names(combined)) | grepl("std\\(\\)", names(combined)) 
 
 # ensure that we also keep the subjectID and activity columns 
 meanstdcols[1:2] <- TRUE 
@@ -58,5 +56,5 @@ combined$activity <- factor(combined$activity, labels=c("Walking", "Walking Upst
 melted <- melt(combined, id=c("subjectID","activity")) 
 tidy <- dcast(melted, subjectID+activity ~ variable, mean) 
 # write the tidy data set to a file 
- write.table(tidy, "TidyDataSet.txt", sep="\t",row.name=FALSE)
+ write.table(tidy, "tidyDataset.txt", sep="\t",row.name=FALSE)
 
